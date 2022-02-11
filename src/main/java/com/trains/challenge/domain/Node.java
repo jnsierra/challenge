@@ -25,5 +25,4 @@ public class Node {
     public void addDestination(Node destination, int distance) {
         adjacentNodes.put(destination, distance);
     }
-
 }

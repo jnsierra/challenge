@@ -2,6 +2,8 @@ package com.trains.challenge.application.service;
 
 import com.trains.challenge.domain.Graph;
 import com.trains.challenge.domain.Node;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,21 +12,27 @@ import java.util.concurrent.atomic.AtomicReference;
 @Service
 public class GraphService implements IGraphService {
 
+    private static Logger logger = LogManager.getLogger(GraphService.class);
 
     @Override
     public Integer sameDestinationRoute(Node nodeSource, Graph graph) {
+        logger.info("sameDestinationRoute | Inicia con el nodo origen: {}", nodeSource.getName());
         List<Integer> distance = new ArrayList<>();
         nodeSource.getAdjacentNodes().forEach((key, value) -> {
             Integer result = 0;
             try {
+                logger.info("sameDestinationRoute | Inicia busqueda de la ruta mas corta desde {} hasta {}", key.getName(), nodeSource.getName());
                 result += getShortestPath(key, nodeSource.getName(), graph);
+                logger.info( "sameDestinationRoute | Resultado de la busqueda {} ", result);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             result += value;
             distance.add(result);
         });
-        return distance.stream().mapToInt(item -> item).min().getAsInt();
+        Integer result = distance.stream().mapToInt(item -> item).min().getAsInt();
+        logger.info("sameDestinationRoute | Obtine el valor minimo de la lista rutas {}", result);
+        return result;
     }
 
     @Override

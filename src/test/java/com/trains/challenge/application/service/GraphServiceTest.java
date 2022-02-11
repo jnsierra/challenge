@@ -126,5 +126,4 @@ public class GraphServiceTest {
         System.out.println("Punto 9:  Distancia B - B: " + resultBB);
         Assertions.assertEquals(9, resultBB);
     }
-
 }

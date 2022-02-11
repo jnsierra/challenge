@@ -1,0 +1,5 @@
+com\trains\challenge\application\service\GraphService.class
+com\trains\challenge\application\service\IGraphService.class
+com\trains\challenge\ChallengeApplication.class
+com\trains\challenge\domain\Node.class
+com\trains\challenge\domain\Graph.class
